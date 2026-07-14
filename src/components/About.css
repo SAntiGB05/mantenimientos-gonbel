@@ -1,0 +1,244 @@
+.about {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--color-blue);
+  padding: 90px 0;
+  min-height: 640px;
+  margin-top: -48px;
+  border-radius: 40px 40px 0 0;
+  z-index: 1;
+}
+
+.about__overlay {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.6s ease;
+}
+
+.about__overlay--1 {
+  background: oklch(0.22 0.13 285);
+}
+
+.about__overlay--2 {
+  background: oklch(0.36 0.09 220);
+}
+
+.about__overlay--radial {
+  opacity: 0.5;
+  background: radial-gradient(circle at 20% 30%, oklch(0.34 0.09 248) 0%, transparent 55%),
+    radial-gradient(circle at 80% 75%, oklch(0.34 0.09 248) 0%, transparent 55%);
+}
+
+.about__row {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  gap: 6vw;
+  transition: flex-direction 0.3s ease;
+}
+
+.about__appliance {
+  flex: 0 0 auto;
+  width: 240px;
+  height: 280px;
+  position: relative;
+}
+
+.about__appliance-layer {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+.about__washer {
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  background: var(--color-bg-cream);
+  border: 4px solid oklch(0.4 0.06 245);
+  box-shadow: 0 30px 60px -20px oklch(0 0 0 / 0.45);
+  position: relative;
+  overflow: hidden;
+  animation: appliance-float 3.6s ease-in-out infinite;
+}
+
+.about__washer-dots {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  gap: 8px;
+}
+
+.about__dot-accent {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.about__dot-cream {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: oklch(0.85 0.02 80);
+}
+
+.about__washer-drum {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: washer-spin 6s linear infinite;
+}
+
+.about__washer-drum-inner {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__washer-drum-core {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--color-bg-cream);
+}
+
+.about__stove {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: var(--color-bg-cream);
+  border: 4px solid oklch(0.4 0.06 245);
+  box-shadow: 0 30px 60px -20px oklch(0 0 0 / 0.45);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: appliance-float 3.6s ease-in-out infinite 0.3s;
+}
+
+.about__stove-burners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-top: 26px;
+}
+
+.about__stove-burners span {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  display: block;
+}
+
+.about__stove-oven {
+  position: absolute;
+  bottom: 24px;
+  width: 172px;
+  height: 120px;
+  border-radius: 14px;
+  background: var(--color-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__stove-oven-door {
+  width: 132px;
+  height: 84px;
+  border-radius: 8px;
+  background: var(--color-accent);
+}
+
+.about__text-wrap {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  min-height: 280px;
+}
+
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.about__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+}
+
+.about__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.15;
+  color: var(--color-cream-white);
+  margin: 0;
+}
+
+.about__paragraph {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-text-on-dark);
+  margin: 0;
+  max-width: 480px;
+  text-align: center;
+}
+
+.about__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.about__dot {
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 100px;
+  background: var(--color-accent);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 860px) {
+  .about__row {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .about__appliance {
+    width: 180px !important;
+    height: 210px !important;
+  }
+}

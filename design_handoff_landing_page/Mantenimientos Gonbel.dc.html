@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    body { margin: 0; background: oklch(0.97 0.012 75); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html { scrollbar-color: oklch(0.55 0.1 225) oklch(0.93 0.02 75); scrollbar-width: thin; }
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: oklch(0.93 0.02 75); }
+    ::-webkit-scrollbar-thumb { background: oklch(0.55 0.1 225); border-radius: 100px; border: 3px solid oklch(0.93 0.02 75); }
+    ::-webkit-scrollbar-thumb:hover { background: oklch(0.28 0.08 250); }
+    a { color: oklch(0.32 0.09 250); text-decoration: none; }
+    a:hover { color: oklch(0.62 0.1 225); }
+    * { box-sizing: border-box; }
+    @media (max-width: 1100px) {
+      .__desktop-nav { display: none !important; }
+      .__desktop-cta { display: none !important; }
+      .__hamburger { display: flex !important; }
+    }
+    @media (max-width: 880px) {
+      .__hero { flex-direction: column-reverse; padding: 6vw 6vw 12vw !important; }
+      .__hero-media { max-width: 100% !important; }
+    }
+    @media (max-width: 520px) {
+      .__hero-media { border-radius: 18px; }
+    }
+    @keyframes float-card {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes about-fade-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes washer-spin {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+    @keyframes appliance-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    @media (max-width: 860px) {
+      .__about-row { flex-direction: column !important; text-align: center; }
+      .__about-row > div:first-child { width: 180px !important; height: 210px !important; }
+    }
+    @media (max-width: 760px) {
+      .__services-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 640px) {
+      .__coverage-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 640px) {
+      .__carousel-stage { height: 340px !important; }
+      .__carousel-arrow { width: 40px !important; height: 40px !important; }
+    }
+    @media (max-width: 820px) {
+      .__contact-form { order: 1; }
+      .__contact-text { order: 2; }
+    }
+  </style>
+</helmet>
+
+<div style="width:100%; min-height:100vh; background:oklch(0.97 0.012 75);">
+
+  <!-- NAVBAR (sticky; becomes a floating rounded pill once you scroll) -->
+  <header data-screen-label="Navbar" style="position:sticky; top:{{ navTop }}px; z-index:50; width:100%; max-width:{{ navMaxWidth }}; margin:{{ navMargin }}; display:flex; align-items:center; justify-content:space-between; padding:{{ navPadding }}; background:oklch(0.97 0.012 75); border-radius:{{ navRadius }}px; box-shadow:{{ navShadow }}; transition:all 0.35s cubic-bezier(0.22,1,0.36,1);">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <img src="./assets/logo-light.png" alt="Mantenimientos Gonbel" style="height:30px; width:auto; flex-shrink:0;">
+      <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:19px; color:oklch(0.28 0.08 250); letter-spacing:-0.01em; white-space:nowrap; flex-shrink:0;">
+        Mantenimientos <span style="color:oklch(0.55 0.1 225);">Gonbel</span>
+      </div>
+    </div>
+
+    <nav style="display:flex; align-items:center; gap:26px; flex-shrink:1; min-width:0;" style-hover="{{ null }}" class="__desktop-nav">
+      <a href="#quienes-somos" style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250); white-space:nowrap;">Quiénes somos</a>
+      <a href="#servicios" style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250); white-space:nowrap;">Servicios</a>
+      <a href="#cobertura" style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250); white-space:nowrap;">Cobertura</a>
+      <a href="#contacto" style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250); white-space:nowrap;">Contacto</a>
+    </nav>
+
+    <a href="https://wa.me/573203444654" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:8px; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); padding:12px 22px; border-radius:100px; font-weight:700; font-size:14px; white-space:nowrap; flex-shrink:0;" style-hover="background:oklch(0.36 0.09 248); color:oklch(0.98 0.01 80);" class="__desktop-cta">
+      WhatsApp
+    </a>
+
+    <button onClick="{{ toggleMenu }}" aria-label="Abrir menú" style="display:none; background:none; border:none; width:44px; height:44px; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;" class="__hamburger">
+      <div style="width:24px; display:flex; flex-direction:column; gap:5px;">
+        <span style="display:block; height:2.5px; width:100%; background:oklch(0.28 0.08 250); border-radius:2px; transform:{{ hamburgerLine1Transform }}; transition:transform 0.25s ease;"></span>
+        <span style="display:block; height:2.5px; width:100%; background:oklch(0.28 0.08 250); border-radius:2px; opacity:{{ hamburgerLine2Opacity }}; transition:opacity 0.2s ease;"></span>
+        <span style="display:block; height:2.5px; width:100%; background:oklch(0.28 0.08 250); border-radius:2px; transform:{{ hamburgerLine3Transform }}; transition:transform 0.25s ease;"></span>
+      </div>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%; background:oklch(0.97 0.012 75); border-top:1px solid oklch(0.9 0.015 75); border-bottom:1px solid oklch(0.9 0.015 75); display:flex; flex-direction:column; padding:8px 6vw 22px;" class="__mobile-menu">
+      <a href="#quienes-somos" onClick="{{ closeMenu }}" style="padding:14px 0; font-weight:600; font-size:17px; color:oklch(0.28 0.08 250); border-bottom:1px solid oklch(0.91 0.015 75);">Quiénes somos</a>
+      <a href="#servicios" onClick="{{ closeMenu }}" style="padding:14px 0; font-weight:600; font-size:17px; color:oklch(0.28 0.08 250); border-bottom:1px solid oklch(0.91 0.015 75);">Servicios</a>
+      <a href="#cobertura" onClick="{{ closeMenu }}" style="padding:14px 0; font-weight:600; font-size:17px; color:oklch(0.28 0.08 250); border-bottom:1px solid oklch(0.91 0.015 75);">Cobertura</a>
+      <a href="#contacto" onClick="{{ closeMenu }}" style="padding:14px 0; font-weight:600; font-size:17px; color:oklch(0.28 0.08 250); border-bottom:1px solid oklch(0.91 0.015 75);">Contacto</a>
+      <a href="https://wa.me/573203444654" target="_blank" rel="noopener" style="margin-top:16px; text-align:center; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); padding:14px 22px; border-radius:100px; font-weight:700; font-size:15px;">
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+  </sc-if>
+
+  <!-- HERO -->
+  <section ref="{{ heroRef }}" data-screen-label="Hero" style="width:100%; display:flex; align-items:center; gap:5vw; padding:5vw 6vw 7vw; min-height:640px;" class="__hero">
+
+    <div style="flex:1; min-width:320px; display:flex; flex-direction:column; align-items:flex-start; gap:24px; opacity:{{ heroLeftOpacity }}; transform:{{ heroLeftTransform }}; transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);">
+      
+
+      <h1 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(34px,4.6vw,58px); line-height:1.08; color:oklch(0.24 0.07 250); margin:0; letter-spacing:-0.02em;">
+        Tu estufa y tu lavadora, funcionando como nuevas.
+      </h1>
+
+      <p style="font-size:18px; line-height:1.6; color:oklch(0.4 0.03 250); margin:0; max-width:520px;">
+        Diagnóstico preciso, técnicos capacitados y repuestos de calidad para que recuperes tus electrodomésticos sin gastar en reemplazos. Atendemos en tu domicilio, con garantía en cada trabajo.
+      </p>
+
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:6px;">
+        <a href="https://wa.me/573203444654" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:10px; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); padding:16px 30px; border-radius:100px; font-weight:700; font-size:16px;" style-hover="background:oklch(0.36 0.09 248); color:oklch(0.98 0.01 80);">
+          Solicitar servicio
+        </a>
+        <a href="#servicios" style="display:flex; align-items:center; gap:8px; padding:16px 12px; font-weight:700; font-size:16px; color:oklch(0.28 0.08 250); border-bottom:2px solid oklch(0.7 0.09 230);">
+          Ver servicios →
+        </a>
+      </div>
+
+      <div style="display:flex; gap:36px; margin-top:18px; flex-wrap:wrap;">
+        <div>
+          <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:26px; color:oklch(0.28 0.08 250);">9</div>
+          <div style="font-size:13.5px; color:oklch(0.45 0.02 250); font-weight:500;">municipios cubiertos</div>
+        </div>
+        <div>
+          <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:26px; color:oklch(0.28 0.08 250);">100%</div>
+          <div style="font-size:13.5px; color:oklch(0.45 0.02 250); font-weight:500;">servicio a domicilio</div>
+        </div>
+        <div>
+          <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:26px; color:oklch(0.28 0.08 250);">Garantía</div>
+          <div style="font-size:13.5px; color:oklch(0.45 0.02 250); font-weight:500;">en cada trabajo</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1; min-width:300px; display:flex; align-items:center; justify-content:center; opacity:{{ heroRightOpacity }}; transform:{{ heroRightTransform }}; transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s, transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.12s;">
+      <div style="width:100%; max-width:600px; aspect-ratio:3/2; position:relative; margin-bottom:56px;" class="__hero-media">
+
+        <!-- decorative geometric shapes: pulled in tight behind the subject so they peek out from around his silhouette instead of floating off in empty space -->
+        <div style="position:absolute; top:4%; left:34%; width:110px; height:110px; border-radius:28px; background:oklch(0.75 0.09 230); opacity:0.6; transform:rotate(18deg); z-index:0;"></div>
+        <div style="position:absolute; bottom:2%; right:10%; width:150px; height:150px; border-radius:50%; background:oklch(0.28 0.08 250); opacity:0.16; z-index:0;"></div>
+        <div style="position:absolute; top:32%; right:16%; width:64px; height:64px; background:oklch(0.55 0.1 225); opacity:0.45; transform:rotate(45deg); z-index:0;"></div>
+        <div style="position:absolute; bottom:34%; left:32%; width:48px; height:48px; border-radius:50%; border:7px solid oklch(0.28 0.08 250); opacity:0.32; z-index:0;"></div>
+        
+
+        <div style="position:relative; width:100%; height:100%; z-index:1;">
+          
+        <div style="position: absolute; left: 97px; width: 100px; height: 100px; border-radius: 32% 68% 62% 38% / 48% 40% 60% 52%; background: oklch(0.55 0.1 225); opacity: 0.4; transform: rotate(-8deg); z-index: 0; top: 270px"></div><img src="./assets/hero-tecnico.png" alt="Técnico de Mantenimientos Gonbel" style="width: 650px; height: 417px; object-fit: contain; object-position: center bottom; display: block"></div>
+
+        <div style="position:absolute; left:24px; right:24px; bottom:-40px; background:oklch(0.98 0.01 80); border-radius:16px; padding:16px 20px; display:flex; align-items:center; gap:14px; box-shadow:0 20px 40px -12px oklch(0.28 0.08 250 / 0.3); z-index:2; animation:float-card 3.2s ease-in-out infinite;">
+          <div style="width:44px; height:44px; border-radius:12px; background:oklch(0.93 0.03 225); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-size:20px; color:oklch(0.3 0.08 245);">✓</span>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:15px; color:oklch(0.28 0.08 250);">Diagnóstico confiable</div>
+            <div style="font-size:13px; color:oklch(0.5 0.02 250);">Técnicos capacitados y repuestos de calidad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIENES SOMOS - auto-rotating, single section with selectable stages -->
+  <section id="quienes-somos" data-screen-label="Quiénes somos" style="position:relative; width:100%; overflow:hidden; display:flex; align-items:center; background:oklch(0.28 0.08 250); padding:90px 0; min-height:640px; margin-top:-48px; border-radius:40px 40px 0 0; z-index:1;">
+
+      <div style="position:absolute; inset:0; background:oklch(0.22 0.13 285); opacity:{{ bgOverlay1Opacity }}; transition:opacity 0.6s ease;"></div>
+      <div style="position:absolute; inset:0; background:oklch(0.36 0.09 220); opacity:{{ bgOverlay2Opacity }}; transition:opacity 0.6s ease;"></div>
+      <div style="position:absolute; inset:0; opacity:0.5; background:radial-gradient(circle at 20% 30%, oklch(0.34 0.09 248) 0%, transparent 55%), radial-gradient(circle at 80% 75%, oklch(0.34 0.09 248) 0%, transparent 55%);"></div>
+
+      <div style="position:relative; width:100%; max-width:1240px; margin:0 auto; padding:0 6vw; display:flex; align-items:center; gap:6vw;" class="__about-row">
+
+        <!-- appliance illustration: washer / stove swap -->
+        <div style="flex:0 0 auto; width:240px; height:280px; position:relative; order:{{ applianceOrder }};">
+
+          <div style="position:absolute; inset:0; transform:translateX({{ washerX }}px) rotate({{ washerRot }}deg); opacity:{{ washerOpacity }}; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease;">
+            <div style="width:100%; height:100%; border-radius:28px; background:oklch(0.97 0.012 75); border:4px solid oklch(0.4 0.06 245); box-shadow:0 30px 60px -20px oklch(0 0 0 / 0.45); position:relative; overflow:hidden; animation:appliance-float 3.6s ease-in-out infinite;">
+              <div style="position:absolute; top:18px; left:18px; display:flex; gap:8px;">
+                <div style="width:12px; height:12px; border-radius:50%; background:oklch(0.75 0.09 230);"></div>
+                <div style="width:12px; height:12px; border-radius:50%; background:oklch(0.85 0.02 80);"></div>
+                <div style="width:12px; height:12px; border-radius:50%; background:oklch(0.85 0.02 80);"></div>
+              </div>
+              <div style="position:absolute; bottom:22px; left:50%; transform:translateX(-50%); width:150px; height:150px; border-radius:50%; background:oklch(0.28 0.08 250); display:flex; align-items:center; justify-content:center; animation:washer-spin 6s linear infinite;">
+                <div style="width:108px; height:108px; border-radius:50%; background:oklch(0.75 0.09 230); display:flex; align-items:center; justify-content:center;">
+                  <div style="width:76px; height:76px; border-radius:50%; background:oklch(0.97 0.012 75);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:absolute; inset:0; transform:translateX({{ stoveX }}px) rotate({{ stoveRot }}deg); opacity:{{ stoveOpacity }}; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease;">
+            <div style="width:100%; height:100%; border-radius:20px; background:oklch(0.97 0.012 75); border:4px solid oklch(0.4 0.06 245); box-shadow:0 30px 60px -20px oklch(0 0 0 / 0.45); position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; animation:appliance-float 3.6s ease-in-out infinite 0.3s;">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:26px;">
+                <div style="width:34px; height:34px; border-radius:50%; background:oklch(0.28 0.08 250);"></div>
+                <div style="width:34px; height:34px; border-radius:50%; background:oklch(0.28 0.08 250);"></div>
+                <div style="width:34px; height:34px; border-radius:50%; background:oklch(0.28 0.08 250);"></div>
+                <div style="width:34px; height:34px; border-radius:50%; background:oklch(0.28 0.08 250);"></div>
+              </div>
+              <div style="position:absolute; bottom:24px; width:172px; height:120px; border-radius:14px; background:oklch(0.28 0.08 250); display:flex; align-items:center; justify-content:center;">
+                <div style="width:132px; height:84px; border-radius:8px; background:oklch(0.75 0.09 230);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- text -->
+        <div style="flex:1; min-width:280px; position:relative; min-height:280px; order:{{ textOrder }};">
+          <div style="display:flex; flex-direction:column; gap:18px; opacity:{{ textOpacity }}; transform:{{ textTransform }}; transition:opacity 0.3s ease-out, transform 0.3s ease-out;">
+            <span style="font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:oklch(0.78 0.09 230);">{{ aboutEyebrow }}</span>
+            <h2 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(28px,3.4vw,42px); line-height:1.15; color:oklch(0.98 0.01 80); margin:0;">
+              {{ aboutTitle }}
+            </h2>
+            <p style="font-size: 17px; line-height: 1.65; color: oklch(0.85 0.02 240); margin: 0; max-width: 480px; text-align: center">
+              {{ aboutParagraph }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute; left:50%; bottom:28px; transform:translateX(-50%); display:flex; gap:10px; z-index:5;">
+        <button onClick="{{ goToStage0 }}" aria-label="Ver: quiénes somos" style="width:{{ dot0Width }}px; height:8px; padding:0; border:none; border-radius:100px; background:oklch(0.75 0.09 230); opacity:{{ dot0Opacity }}; transition:all 0.3s ease; cursor:pointer;"></button>
+        <button onClick="{{ goToStage1 }}" aria-label="Ver: nuestra misión" style="width:{{ dot1Width }}px; height:8px; padding:0; border:none; border-radius:100px; background:oklch(0.75 0.09 230); opacity:{{ dot1Opacity }}; transition:all 0.3s ease; cursor:pointer;"></button>
+        <button onClick="{{ goToStage2 }}" aria-label="Ver: propuesta de valor" style="width:{{ dot2Width }}px; height:8px; padding:0; border:none; border-radius:100px; background:oklch(0.75 0.09 230); opacity:{{ dot2Opacity }}; transition:all 0.3s ease; cursor:pointer;"></button>
+      </div>
+  </section>
+
+  <!-- GALERIA - unique coverflow-style carousel (images added later via drag/drop) -->
+  <section id="galeria" data-screen-label="Galería" style="width:100%; padding:110px 6vw 130px; background:oklch(0.97 0.012 75); display:flex; flex-direction:column; align-items:center; gap:56px; overflow:hidden;">
+
+    <div style="max-width:640px; text-align:center; display:flex; flex-direction:column; gap:16px; align-items:center;">
+      <span style="font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:oklch(0.5 0.1 225);">Nuestro proceso</span>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(28px,3.2vw,40px); line-height:1.15; color:oklch(0.24 0.07 250); margin:0;">Así se ve un mantenimiento, paso a paso.</h2>
+    </div>
+
+    <div style="position:relative; width:100%; max-width:1100px; height:420px; display:flex; align-items:center; justify-content:center;" class="__carousel-stage">
+
+      <button onClick="{{ prevGallerySlide }}" aria-label="Anterior" style="position:absolute; left:0; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); border:none; font-size:20px; cursor:pointer; z-index:20; display:flex; align-items:center; justify-content:center;" style-hover="background:oklch(0.36 0.09 248);" class="__carousel-arrow">‹</button>
+
+      <sc-for list="{{ galleryItems }}" as="item" hint-placeholder-count="5">
+        <div style="position:absolute; top:0; left:50%; width:280px; height:380px; margin-left:-140px; transition:transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.6s ease; transform:{{ item.transform }}; opacity:{{ item.opacity }}; z-index:{{ item.z }};">
+          <image-slot id="{{ item.id }}" src="{{ item.src }}" shape="rounded" radius="22" placeholder="Foto del proceso de mantenimiento" style="width:100%; height:100%; box-shadow:0 30px 60px -18px oklch(0 0 0 / 0.4);"></image-slot>
+        </div>
+      </sc-for>
+
+      <button onClick="{{ nextGallerySlide }}" aria-label="Siguiente" style="position:absolute; right:0; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); border:none; font-size:20px; cursor:pointer; z-index:20; display:flex; align-items:center; justify-content:center;" style-hover="background:oklch(0.36 0.09 248);" class="__carousel-arrow">›</button>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="5">
+        <button onClick="{{ dot.onClick }}" aria-label="Ir a la imagen" style="width:{{ dot.width }}px; height:8px; padding:0; border:none; border-radius:100px; background:oklch(0.55 0.1 225); opacity:{{ dot.opacity }}; transition:all 0.3s ease; cursor:pointer;"></button>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" data-screen-label="Servicios" style="width: 100%; padding: 100px 6vw; display: flex; flex-direction: column; gap: 56px; background-color: #004160">
+    <div style="max-width:640px; display:flex; flex-direction:column; gap:16px;">
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6EB9DC">Servicios</span>
+      <h2 style="font-family: 'Manrope',sans-serif; font-weight: 800; font-size: clamp(28px,3.2vw,40px); line-height: 1.15; color: #FDF8F1; margin: 0">
+        Todo lo que tu estufa o lavadora necesita, en un solo lugar.
+      </h2>
+      <p style="font-size: 17px; line-height: 1.6; color: #C2D0DA; margin: 0">
+        Diagnóstico, reparación, mantenimiento e instalación, con garantía sobre cada trabajo realizado.
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:28px;" class="__services-grid">
+
+      <div onClick="{{ goWhatsappPreventivo }}" style="display:flex; flex-direction:column; gap:18px; padding:32px; background:oklch(0.28 0.08 250); border:1px solid oklch(0.36 0.09 248); border-radius:20px; transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor:pointer;" style-hover="background:oklch(0.75 0.09 230); transform:scale(1.045); box-shadow:0 24px 48px -14px oklch(0.28 0.08 250 / 0.45); border-color:oklch(0.75 0.09 230);">
+        <div style="width:52px; height:52px; border-radius:14px; background:oklch(0.75 0.09 230); display:flex; align-items:center; justify-content:center; transition:background 0.3s ease;" style-hover="background:oklch(0.28 0.08 250);">
+          <div style="width:20px; height:20px; border-radius:50%; border:3px solid oklch(0.28 0.08 250); transition:border-color 0.3s ease;" style-hover="border-color:oklch(0.75 0.09 230);"></div>
+        </div>
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:oklch(0.98 0.01 80); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.24 0.07 250);">Mantenimiento preventivo</h3>
+        <p style="font-size:15.5px; line-height:1.6; color:oklch(0.85 0.02 240); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.4 0.03 250);">
+          Limpieza interna, inspección de componentes y ajustes mecánicos para evitar daños futuros y prolongar la vida útil de tu equipo.
+        </p>
+      </div>
+
+      <div onClick="{{ goWhatsappReparacion }}" style="display:flex; flex-direction:column; gap:18px; padding:32px; background:oklch(0.28 0.08 250); border:1px solid oklch(0.36 0.09 248); border-radius:20px; transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor:pointer;" style-hover="background:oklch(0.75 0.09 230); transform:scale(1.045); box-shadow:0 24px 48px -14px oklch(0.28 0.08 250 / 0.45); border-color:oklch(0.75 0.09 230);">
+        <div style="width:52px; height:52px; border-radius:14px; background:oklch(0.75 0.09 230); display:flex; align-items:center; justify-content:center; transition:background 0.3s ease;" style-hover="background:oklch(0.28 0.08 250);">
+          <div style="width:22px; height:22px; background:oklch(0.28 0.08 250); transform:rotate(45deg); transition:background 0.3s ease;" style-hover="background:oklch(0.75 0.09 230);"></div>
+        </div>
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:oklch(0.98 0.01 80); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.24 0.07 250);">Reparación especializada</h3>
+        <p style="font-size:15.5px; line-height:1.6; color:oklch(0.85 0.02 240); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.4 0.03 250);">
+          Diagnóstico y reparación de fallas mecánicas, eléctricas y electrónicas con herramientas profesionales y repuestos de calidad.
+        </p>
+      </div>
+
+      <div onClick="{{ goWhatsappDiagnostico }}" style="display:flex; flex-direction:column; gap:18px; padding:32px; background:oklch(0.28 0.08 250); border:1px solid oklch(0.36 0.09 248); border-radius:20px; transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor:pointer;" style-hover="background:oklch(0.75 0.09 230); transform:scale(1.045); box-shadow:0 24px 48px -14px oklch(0.28 0.08 250 / 0.45); border-color:oklch(0.75 0.09 230);">
+        <div style="width:52px; height:52px; border-radius:14px; background:oklch(0.75 0.09 230); display:flex; align-items:center; justify-content:center; transition:background 0.3s ease;" style-hover="background:oklch(0.28 0.08 250);">
+          <div style="width:22px; height:22px; border-radius:6px; border:3px solid oklch(0.28 0.08 250); transition:border-color 0.3s ease;" style-hover="border-color:oklch(0.75 0.09 230);"></div>
+        </div>
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:oklch(0.98 0.01 80); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.24 0.07 250);">Diagnóstico técnico profesional</h3>
+        <p style="font-size:15.5px; line-height:1.6; color:oklch(0.85 0.02 240); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.4 0.03 250);">
+          Inspección completa antes de intervenir el equipo, para ofrecerte transparencia y una solución acorde a la falla real.
+        </p>
+      </div>
+
+      <div onClick="{{ goWhatsappInstalacion }}" style="display:flex; flex-direction:column; gap:18px; padding:32px; background:oklch(0.28 0.08 250); border:1px solid oklch(0.36 0.09 248); border-radius:20px; transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor:pointer;" style-hover="background:oklch(0.75 0.09 230); transform:scale(1.045); box-shadow:0 24px 48px -14px oklch(0.28 0.08 250 / 0.45); border-color:oklch(0.75 0.09 230);">
+        <div style="width:52px; height:52px; border-radius:14px; background:oklch(0.75 0.09 230); display:flex; align-items:center; justify-content:center; transition:background 0.3s ease;" style-hover="background:oklch(0.28 0.08 250);">
+          <div style="width:22px; height:22px; border-radius:50%; background:oklch(0.28 0.08 250); transition:background 0.3s ease;" style-hover="background:oklch(0.75 0.09 230);"></div>
+        </div>
+        <h3 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:20px; color:oklch(0.98 0.01 80); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.24 0.07 250);">Instalación y puesta en marcha</h3>
+        <p style="font-size:15.5px; line-height:1.6; color:oklch(0.85 0.02 240); margin:0; transition:color 0.3s ease;" style-hover="color:oklch(0.4 0.03 250);">
+          Instalación segura con verificación técnica y pruebas de funcionamiento antes de entregarte el equipo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COBERTURA -->
+  <section id="cobertura" data-screen-label="Cobertura" style="width:100%; padding:100px 6vw; background:oklch(0.93 0.02 75); display:flex; gap:6vw; flex-wrap:wrap; align-items:center;" class="__coverage-row">
+
+    <div style="flex:1; min-width:320px; display:flex; flex-direction:column; gap:16px;">
+      <span style="font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:oklch(0.5 0.1 225);">Cobertura</span>
+      <h2 style="font-family:'Manrope',sans-serif; font-weight:800; font-size:clamp(28px,3.2vw,40px); line-height:1.15; color:oklch(0.24 0.07 250); margin:0;">
+        Atendemos en todo el departamento del Quindío.
+      </h2>
+      <p style="font-size:17px; line-height:1.6; color:oklch(0.4 0.03 250); margin:0; max-width:460px;">
+        Nuestro servicio es principalmente a domicilio: nos desplazamos hasta la ubicación del cliente en cualquiera de estos municipios.
+      </p>
+      <a href="https://wa.me/573203444654" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:10px; width:fit-content; background:oklch(0.28 0.08 250); color:oklch(0.98 0.01 80); padding:16px 30px; border-radius:100px; font-weight:700; font-size:16px; margin-top:8px;" style-hover="background:oklch(0.36 0.09 248); color:oklch(0.98 0.01 80);">
+        Consultar disponibilidad
+      </a>
+    </div>
+
+    <div style="flex:1; min-width:320px; display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;" class="__coverage-grid">
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Armenia</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Buenavista</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Calarcá</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Circasia</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Filandia</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">La Tebaida</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Montenegro</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.93 0.03 225); border:1px solid oklch(0.75 0.09 230); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.28 0.08 250); flex-shrink:0;"></span>
+        <span style="font-weight:700; font-size:15px; color:oklch(0.28 0.08 250);">Quimbaya</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; padding:16px 18px; background:oklch(0.99 0.006 80); border:1px solid oklch(0.88 0.02 75); border-radius:14px;">
+        <span style="width:8px; height:8px; border-radius:50%; background:oklch(0.55 0.1 225); flex-shrink:0;"></span>
+        <span style="font-weight:600; font-size:15px; color:oklch(0.28 0.08 250);">Salento</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" data-screen-label="Contacto" style="width: 100%; padding: 100px 6vw; display: flex; gap: 6vw; flex-wrap: wrap; background-color: #002A4F" class="__contact-row">
+
+    <div style="flex:1; min-width:300px; display:flex; flex-direction:column; gap:16px;" class="__contact-text">
+      <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.78 0.09 230)">Contacto</span>
+      <h2 style="font-family: 'Manrope',sans-serif; font-weight: 800; font-size: clamp(28px,3.2vw,40px); line-height: 1.15; color: oklch(0.98 0.01 80); margin: 0">
+        Cuéntanos qué necesitas, te respondemos por WhatsApp.
+      </h2>
+      <p style="font-size: 17px; line-height: 1.6; color: oklch(0.85 0.02 240); margin: 0; max-width: 420px">
+        Completa el formulario y te contactaremos para coordinar la visita técnica a domicilio.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:18px; margin-top:16px;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background-color: oklch(0.75 0.09 230)">
+            <span style="font-size:19px; color:oklch(0.24 0.07 250);">✆</span>
+          </div>
+          <div>
+            <div style="font-size: 13px; color: oklch(0.68 0.06 230); font-weight: 600">Teléfono / WhatsApp</div>
+            <div style="font-size: 16px; color: oklch(0.98 0.01 80); font-weight: 700">+57 320 344 4654</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background-color: oklch(0.75 0.09 230)">
+            <span style="font-size:19px; color:oklch(0.24 0.07 250);">⚲</span>
+          </div>
+          <div>
+            <div style="font-size: 13px; color: oklch(0.68 0.06 230); font-weight: 600">Ubicación</div>
+            <div style="font-size: 16px; color: oklch(0.98 0.01 80); font-weight: 700">Quimbaya, Quindío</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: 1; min-width: 320px; max-width: 520px; border: 1px solid oklch(0.91 0.015 75); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 30px 60px -30px oklch(0 0 0 / 0.35); background-color: oklch(0.99 0.006 80)" class="__contact-form">
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label style="font-size:13px; font-weight:700; color:oklch(0.28 0.08 250);">Nombre</label>
+        <input type="text" value="{{ contactName }}" onChange="{{ onContactNameChange }}" placeholder="Tu nombre" style="padding:13px 16px; border-radius:12px; border:1px solid oklch(0.87 0.02 75); font-size:15px; font-family:'Inter',sans-serif; color:oklch(0.24 0.07 250); outline:none;">
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label style="font-size:13px; font-weight:700; color:oklch(0.28 0.08 250);">Teléfono</label>
+        <input type="tel" value="{{ contactPhone }}" onChange="{{ onContactPhoneChange }}" placeholder="Tu número de contacto" style="padding:13px 16px; border-radius:12px; border:1px solid oklch(0.87 0.02 75); font-size:15px; font-family:'Inter',sans-serif; color:oklch(0.24 0.07 250); outline:none;">
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label style="font-size:13px; font-weight:700; color:oklch(0.28 0.08 250);">Equipo</label>
+        <select value="{{ contactAppliance }}" onChange="{{ onContactApplianceChange }}" style="padding:13px 16px; border-radius:12px; border:1px solid oklch(0.87 0.02 75); font-size:15px; font-family:'Inter',sans-serif; color:oklch(0.24 0.07 250); outline:none; background:oklch(0.99 0.006 80);">
+          <option value="Lavadora">Lavadora</option>
+          <option value="Estufa">Estufa</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <label style="font-size:13px; font-weight:700; color:oklch(0.28 0.08 250);">Cuéntanos qué pasa</label>
+        <textarea value="{{ contactMessage }}" onChange="{{ onContactMessageChange }}" placeholder="Describe el problema o el servicio que necesitas" rows="4" style="padding:13px 16px; border-radius:12px; border:1px solid oklch(0.87 0.02 75); font-size:15px; font-family:'Inter',sans-serif; color:oklch(0.24 0.07 250); outline:none; resize:vertical;"></textarea>
+      </div>
+
+      <button onClick="{{ sendWhatsapp }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; color: oklch(0.98 0.01 80); padding: 16px 30px; border-radius: 100px; font-weight: 700; font-size: 16px; border: none; cursor: pointer; margin-top: 6px; background-color: oklch(0.28 0.08 250)" style-hover="background:oklch(0.36 0.09 248); color:oklch(0.98 0.01 80);">
+        Enviar por WhatsApp
+      </button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="width:100%; background:oklch(0.24 0.07 250); padding:64px 6vw 32px; display:flex; flex-direction:column; gap:40px;">
+    <div style="display:flex; flex-wrap:wrap; gap:48px; justify-content:space-between;">
+      <div style="display:flex; flex-direction:column; gap:14px; max-width:320px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="./assets/logo-color.png" alt="Mantenimientos Gonbel" style="height:38px; width:auto; flex-shrink:0;">
+          <div style="font-family:'Manrope',sans-serif; font-weight:800; font-size:17px; color:oklch(0.98 0.01 80);">Mantenimientos Gonbel</div>
+        </div>
+        <p style="font-size:14.5px; line-height:1.6; color:oklch(0.72 0.02 250); margin:0;">
+          Cuidamos tus electrodomésticos como si fueran nuestros. Servicio técnico a domicilio en todo el Quindío.
+        </p>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:oklch(0.6 0.09 230);">Navegación</div>
+        <a href="#quienes-somos" style="font-size:14.5px; color:oklch(0.85 0.02 250);">Quiénes somos</a>
+        <a href="#servicios" style="font-size:14.5px; color:oklch(0.85 0.02 250);">Servicios</a>
+        <a href="#cobertura" style="font-size:14.5px; color:oklch(0.85 0.02 250);">Cobertura</a>
+        <a href="#contacto" style="font-size:14.5px; color:oklch(0.85 0.02 250);">Contacto</a>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:oklch(0.6 0.09 230);">Contacto</div>
+        <a href="https://wa.me/573203444654" target="_blank" rel="noopener" style="font-size:14.5px; color:oklch(0.85 0.02 250);">+57 320 344 4654</a>
+        <span style="font-size:14.5px; color:oklch(0.85 0.02 250);">Quimbaya, Quindío</span>
+        <span style="font-size:14.5px; color:oklch(0.85 0.02 250);">Cobertura en todo el Quindío</span>
+      </div>
+    </div>
+
+    <div style="width:100%; height:1px; background:oklch(0.36 0.05 250);"></div>
+
+    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <span style="font-size:13px; color:oklch(0.62 0.02 250);">© 2026 Mantenimientos Gonbel. Todos los derechos reservados.</span>
+      <span style="font-size:13px; color:oklch(0.62 0.02 250);">Quimbaya · Armenia · Calarcá · Circasia · Filandia · La Tebaida · Montenegro · Salento · Buenavista</span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    menuOpen: false, heroVisible: false, aboutStage: 0, aboutTextFading: false, navScrolled: false,
+    galleryIndex: 0,
+    contactName: '', contactPhone: '', contactAppliance: 'Lavadora', contactMessage: '',
+  };
+
+  onContactNameChange = (e) => this.setState({ contactName: e.target.value });
+  onContactPhoneChange = (e) => this.setState({ contactPhone: e.target.value });
+  onContactApplianceChange = (e) => this.setState({ contactAppliance: e.target.value });
+  onContactMessageChange = (e) => this.setState({ contactMessage: e.target.value });
+
+  sendWhatsapp = () => {
+    const { contactName, contactPhone, contactAppliance, contactMessage } = this.state;
+    const lines = [
+      'Hola Mantenimientos Gonbel, quiero solicitar un servicio.',
+      contactName ? `Nombre: ${contactName}` : null,
+      contactPhone ? `Teléfono: ${contactPhone}` : null,
+      `Equipo: ${contactAppliance}`,
+      contactMessage ? `Detalle: ${contactMessage}` : null,
+    ].filter(Boolean);
+    const url = `https://wa.me/573203444654?text=${encodeURIComponent(lines.join('\n'))}`;
+    window.open(url, '_blank');
+  };
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+
+  openServiceWhatsapp = () => {
+    const text = 'Hola Mantenimientos Gonbel, quisiera más información sobre sus servicios.';
+    window.open(`https://wa.me/573203444654?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
+  goWhatsappPreventivo = () => this.openServiceWhatsapp();
+  goWhatsappReparacion = () => this.openServiceWhatsapp();
+  goWhatsappDiagnostico = () => this.openServiceWhatsapp();
+  goWhatsappInstalacion = () => this.openServiceWhatsapp();
+
+  galleryIds = ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'gallery-5', 'gallery-6', 'gallery-7', 'gallery-8', 'gallery-9'];
+
+  setGallerySlide = (i) => {
+    const n = this.galleryIds.length;
+    this.setState({ galleryIndex: ((i % n) + n) % n });
+  };
+
+  nextGallerySlide = () => {
+    this.setGallerySlide(this.state.galleryIndex + 1);
+    this.resetGalleryTimer();
+  };
+
+  prevGallerySlide = () => {
+    this.setGallerySlide(this.state.galleryIndex - 1);
+    this.resetGalleryTimer();
+  };
+
+  goToGallery0 = () => { this.setGallerySlide(0); this.resetGalleryTimer(); };
+  goToGallery1 = () => { this.setGallerySlide(1); this.resetGalleryTimer(); };
+  goToGallery2 = () => { this.setGallerySlide(2); this.resetGalleryTimer(); };
+  goToGallery3 = () => { this.setGallerySlide(3); this.resetGalleryTimer(); };
+  goToGallery4 = () => { this.setGallerySlide(4); this.resetGalleryTimer(); };
+  goToGallery5 = () => { this.setGallerySlide(5); this.resetGalleryTimer(); };
+  goToGallery6 = () => { this.setGallerySlide(6); this.resetGalleryTimer(); };
+  goToGallery7 = () => { this.setGallerySlide(7); this.resetGalleryTimer(); };
+  goToGallery8 = () => { this.setGallerySlide(8); this.resetGalleryTimer(); };
+
+  resetGalleryTimer() {
+    clearInterval(this._galleryTimer);
+    this._galleryTimer = setInterval(() => this.setGallerySlide(this.state.galleryIndex + 1), 6000);
+  }
+
+  getGalleryItems(activeIndex) {
+    const n = this.galleryIds.length;
+    return this.galleryIds.map((id, i) => {
+      let offset = i - activeIndex;
+      if (offset > n / 2) offset -= n;
+      if (offset < -n / 2) offset += n;
+      const abs = Math.abs(offset);
+      const scale = offset === 0 ? 1 : 1 - abs * 0.18;
+      const x = offset * 190;
+      const opacity = abs >= 3 ? 0 : 1 - abs * 0.32;
+      return {
+        id,
+        src: `./uploads/mantenimiento${i + 1}.jpg`,
+        transform: `translateX(${x}px) scale(${scale})`,
+        opacity,
+        z: 10 - abs,
+      };
+    });
+  }
+
+  getGalleryDots(activeIndex) {
+    const fns = [this.goToGallery0, this.goToGallery1, this.goToGallery2, this.goToGallery3, this.goToGallery4, this.goToGallery5, this.goToGallery6, this.goToGallery7, this.goToGallery8];
+    return this.galleryIds.map((id, i) => ({
+      onClick: fns[i],
+      width: i === activeIndex ? 26 : 8,
+      opacity: i === activeIndex ? 1 : 0.35,
+    }));
+  }
+
+  onNavScroll = () => {
+    const scrolled = window.scrollY > 40;
+    if (scrolled !== this.state.navScrolled) this.setState({ navScrolled: scrolled });
+  };
+
+  // hero is the first thing on screen on load, so just fade it in on mount
+  // rather than depend on IntersectionObserver (unreliable in some preview/embed contexts)
+  heroRef = (el) => {
+    if (!el || this._heroObserved) return;
+    this._heroObserved = true;
+    setTimeout(() => this.setState({ heroVisible: true }), 50);
+  };
+
+  // appliance visual state purely from the discrete stage (0=washer,1=stove,2=washer)
+  getApplianceState(stage) {
+    const travel = 280;
+    const washerVisible = stage !== 1;
+    const stoveVisible = stage === 1;
+    return {
+      washerOpacity: washerVisible ? 1 : 0,
+      washerX: washerVisible ? 0 : -travel,
+      washerRot: washerVisible ? -4 : -18,
+      stoveOpacity: stoveVisible ? 1 : 0,
+      stoveX: stoveVisible ? 0 : travel,
+      stoveRot: stoveVisible ? 4 : 18,
+      bgOverlay1Opacity: stage === 1 ? 1 : 0,
+      bgOverlay2Opacity: stage === 2 ? 1 : 0,
+    };
+  }
+
+  aboutContent = [
+    {
+      eyebrow: 'Quiénes somos',
+      title: 'Un servicio técnico especializado en Quindío.',
+      paragraph: 'En Mantenimientos Gonbel nos dedicamos al mantenimiento preventivo, reparación e instalación de estufas y lavadoras, atendiendo hogares, familias y pequeños negocios en todo el departamento.',
+    },
+    {
+      eyebrow: 'Nuestra misión',
+      title: 'Soluciones técnicas confiables, oportunas y de calidad.',
+      paragraph: 'Trabajamos para que cada cliente recupere el funcionamiento de sus electrodomésticos sin necesidad de reemplazarlos prematuramente, con diagnósticos precisos y técnicos capacitados.',
+    },
+    {
+      eyebrow: 'Nuestra propuesta de valor',
+      title: 'Cercanía, garantía y cobertura en todo el Quindío.',
+      paragraph: 'Atención rápida a domicilio, repuestos de calidad y garantía sobre cada servicio realizado, para devolverte la tranquilidad de contar con un equipo funcionando correctamente.',
+    },
+  ];
+
+  // swap the visible stage with a brief fade-out / fade-in of the text block
+  changeStage = (nextStage) => {
+    if (nextStage === this.state.aboutStage) return;
+    this.setState({ aboutTextFading: true });
+    clearTimeout(this._fadeTimer);
+    this._fadeTimer = setTimeout(() => {
+      this.setState({ aboutStage: nextStage, aboutTextFading: false });
+    }, 280);
+  };
+
+  advanceStage = () => this.changeStage((this.state.aboutStage + 1) % 3);
+
+  goToStage = (i) => {
+    this.changeStage(i);
+    this.resetAboutTimer();
+  };
+
+  goToStage0 = () => this.goToStage(0);
+  goToStage1 = () => this.goToStage(1);
+  goToStage2 = () => this.goToStage(2);
+
+  resetAboutTimer() {
+    clearInterval(this._aboutTimer);
+    this._aboutTimer = setInterval(this.advanceStage, 20000);
+  }
+
+  componentDidMount() {
+    this.resetAboutTimer();
+    this.resetGalleryTimer();
+    window.addEventListener('scroll', this.onNavScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._aboutTimer);
+    clearInterval(this._galleryTimer);
+    clearTimeout(this._fadeTimer);
+    window.removeEventListener('scroll', this.onNavScroll);
+  }
+
+  renderVals() {
+    const open = this.state.menuOpen;
+    const visible = this.state.heroVisible;
+    const stage = this.state.aboutStage;
+    const fading = this.state.aboutTextFading;
+
+    const scrolled = this.state.navScrolled;
+
+    return {
+      menuOpen: open,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      navTop: scrolled ? 14 : 0,
+      navMaxWidth: scrolled ? '1100px' : '100%',
+      navMargin: scrolled ? '0 auto' : '0',
+      navPadding: scrolled ? '12px 26px' : '22px 6vw',
+      navRadius: scrolled ? 100 : 0,
+      navShadow: scrolled ? '0 20px 40px -14px oklch(0.28 0.08 250 / 0.35)' : 'none',
+      hamburgerLine1Transform: open ? 'translateY(7.5px) rotate(45deg)' : 'none',
+      hamburgerLine2Opacity: open ? 0 : 1,
+      hamburgerLine3Transform: open ? 'translateY(-7.5px) rotate(-45deg)' : 'none',
+      heroRef: this.heroRef,
+      heroLeftOpacity: visible ? 1 : 0,
+      heroLeftTransform: visible ? 'translateY(0)' : 'translateY(28px)',
+      heroRightOpacity: visible ? 1 : 0,
+      heroRightTransform: visible ? 'translateY(0) scale(1)' : 'translateY(28px) scale(0.97)',
+
+      ...this.getApplianceState(stage),
+      applianceOrder: stage === 1 ? 2 : 1,
+      textOrder: stage === 1 ? 1 : 2,
+      aboutEyebrow: this.aboutContent[stage].eyebrow,
+      aboutTitle: this.aboutContent[stage].title,
+      aboutParagraph: this.aboutContent[stage].paragraph,
+      textOpacity: fading ? 0 : 1,
+      textTransform: fading ? 'translateY(10px)' : 'translateY(0)',
+      goToStage0: this.goToStage0,
+      goToStage1: this.goToStage1,
+      goToStage2: this.goToStage2,
+      dot0Width: stage === 0 ? 28 : 8,
+      dot1Width: stage === 1 ? 28 : 8,
+      dot2Width: stage === 2 ? 28 : 8,
+      dot0Opacity: stage === 0 ? 1 : 0.35,
+      dot1Opacity: stage === 1 ? 1 : 0.35,
+      dot2Opacity: stage === 2 ? 1 : 0.35,
+
+      contactName: this.state.contactName,
+      contactPhone: this.state.contactPhone,
+      contactAppliance: this.state.contactAppliance,
+      contactMessage: this.state.contactMessage,
+      onContactNameChange: this.onContactNameChange,
+      onContactPhoneChange: this.onContactPhoneChange,
+      onContactApplianceChange: this.onContactApplianceChange,
+      onContactMessageChange: this.onContactMessageChange,
+      sendWhatsapp: this.sendWhatsapp,
+
+      galleryItems: this.getGalleryItems(this.state.galleryIndex),
+      galleryDots: this.getGalleryDots(this.state.galleryIndex),
+      nextGallerySlide: this.nextGallerySlide,
+      prevGallerySlide: this.prevGallerySlide,
+
+      goWhatsappPreventivo: this.goWhatsappPreventivo,
+      goWhatsappReparacion: this.goWhatsappReparacion,
+      goWhatsappDiagnostico: this.goWhatsappDiagnostico,
+      goWhatsappInstalacion: this.goWhatsappInstalacion,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

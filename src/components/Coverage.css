@@ -1,0 +1,113 @@
+.coverage {
+  width: 100%;
+  padding: 100px 6vw;
+  background: var(--color-bg-cream-2);
+  display: flex;
+  gap: 6vw;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.coverage__text {
+  flex: 1;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.coverage__eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+}
+
+.coverage__title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  color: var(--color-blue-dark);
+  margin: 0;
+}
+
+.coverage__paragraph {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 460px;
+}
+
+.coverage__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  background: var(--color-blue);
+  color: var(--color-cream-white);
+  padding: 16px 30px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 8px;
+  transition: background 0.2s ease;
+}
+
+.coverage__cta:hover {
+  background: var(--color-blue-hover);
+  color: var(--color-cream-white);
+}
+
+.coverage__grid {
+  flex: 1;
+  min-width: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.coverage__chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  background: oklch(0.99 0.006 80);
+  border: 1px solid var(--color-border-light);
+  border-radius: 14px;
+}
+
+.coverage__chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  flex-shrink: 0;
+}
+
+.coverage__chip-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-blue);
+}
+
+.coverage__chip--highlight {
+  background: oklch(0.93 0.03 225);
+  border: 1px solid var(--color-accent);
+}
+
+.coverage__chip--highlight .coverage__chip-dot {
+  background: var(--color-blue);
+}
+
+.coverage__chip--highlight .coverage__chip-name {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .coverage__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

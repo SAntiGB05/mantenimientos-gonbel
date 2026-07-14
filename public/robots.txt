@@ -1,0 +1,6 @@
+# IMPORTANT: replace mantenimientosgonbel.com below (and in sitemap.xml,
+# and VITE_SITE_URL in .env) with the real production domain once available.
+User-agent: *
+Allow: /
+
+Sitemap: https://mantenimientosgonbel.com/sitemap.xml
