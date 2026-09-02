@@ -151,3 +151,17 @@
     order: 2;
   }
 }
+
+@media (max-width: 480px) {
+  .contact {
+    flex-direction: column;
+  }
+  .contact__text,
+  .contact__form {
+    min-width: 0;
+    width: 100%;
+  }
+  .contact__form {
+    padding: 24px;
+  }
+}

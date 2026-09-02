@@ -241,4 +241,8 @@
     width: 180px !important;
     height: 210px !important;
   }
+  .about__text-wrap {
+    min-width: 0;
+    width: 100%;
+  }
 }

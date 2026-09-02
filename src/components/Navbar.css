@@ -28,6 +28,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .navbar__logo {
@@ -43,7 +45,9 @@
   color: var(--color-blue);
   letter-spacing: -0.01em;
   white-space: nowrap;
-  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .navbar__wordmark span {
@@ -165,5 +169,20 @@
   }
   .navbar__hamburger {
     display: flex !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar {
+    padding: 18px 5vw;
+  }
+  .navbar__logo {
+    height: 26px;
+  }
+  .navbar__wordmark {
+    font-size: 16px;
+  }
+  .navbar__brand {
+    gap: 8px;
   }
 }

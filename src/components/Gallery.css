@@ -119,3 +119,22 @@
     height: 40px !important;
   }
 }
+
+@media (max-width: 400px) {
+  .gallery {
+    padding: 90px 5vw 100px;
+  }
+  .gallery__stage {
+    height: 290px !important;
+  }
+  .gallery__slide {
+    width: 210px;
+    height: 280px;
+    margin-left: -105px;
+  }
+  .gallery__arrow {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 16px;
+  }
+}
