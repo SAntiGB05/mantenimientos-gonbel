@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mantenimientosgonbel.com/sitemap.xml
+Sitemap: https://www.mantenimientosgonbel.com/sitemap.xml
