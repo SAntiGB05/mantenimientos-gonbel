@@ -9,25 +9,25 @@ function openServiceWhatsapp() {
 
 const SERVICES = [
   {
-    title: 'Mantenimiento preventivo',
+    title: 'Mantenimiento preventivo de lavadoras y estufas',
     description:
       'Limpieza interna, inspección de componentes y ajustes mecánicos para evitar daños futuros y prolongar la vida útil de tu equipo.',
     icon: <div className="services__icon-ring" />,
   },
   {
-    title: 'Reparación especializada',
+    title: 'Reparación de lavadoras y estufas',
     description:
       'Diagnóstico y reparación de fallas mecánicas, eléctricas y electrónicas con herramientas profesionales y repuestos de calidad.',
     icon: <div className="services__icon-diamond" />,
   },
   {
-    title: 'Diagnóstico técnico profesional',
+    title: 'Diagnóstico técnico de electrodomésticos',
     description:
       'Inspección completa antes de intervenir el equipo, para ofrecerte transparencia y una solución acorde a la falla real.',
     icon: <div className="services__icon-square" />,
   },
   {
-    title: 'Instalación y puesta en marcha',
+    title: 'Instalación de lavadoras y estufas',
     description:
       'Instalación segura con verificación técnica y pruebas de funcionamiento antes de entregarte el equipo.',
     icon: <div className="services__icon-circle" />,
@@ -40,11 +40,11 @@ export default function Services() {
       <div className="services__heading">
         <span className="services__eyebrow">Servicios</span>
         <h2 className="services__title">
-          Todo lo que tu estufa o lavadora necesita, en un solo lugar.
+          Servicios de mantenimiento y reparación de lavadoras y estufas.
         </h2>
         <p className="services__paragraph">
-          Diagnóstico, reparación, mantenimiento e instalación, con garantía sobre cada trabajo
-          realizado.
+          Diagnóstico, reparación, mantenimiento e instalación de lavadoras y estufas, con
+          garantía sobre cada trabajo realizado.
         </p>
       </div>
 

@@ -35,6 +35,18 @@ export default function Gallery() {
   const next = () => goTo(activeIndex + 1);
   const prev = () => goTo(activeIndex - 1);
 
+  const IMAGE_ALT_TEXT = [
+    'Lavadora y secadora tipo torre instaladas, listas para mantenimiento en Quindío',
+    'Técnico de Mantenimientos Gonbel revisando el ducto de secado en mantenimiento de lavadora',
+    'Diagnóstico interno del tambor y motor durante mantenimiento de lavadora',
+    'Revisión del sistema de secado y ventilador en mantenimiento de lavadora',
+    'Lavadora abierta durante reparación y mantenimiento preventivo en Armenia',
+    'Técnico ajustando el agitador durante el mantenimiento de la lavadora',
+    'Limpieza y revisión de la tina interna en mantenimiento de lavadora',
+    'Técnico instalando conexión eléctrica y ducto de secado de lavadora',
+    'Instalación de ducto de ventilación para lavadora en Quindío',
+  ];
+
   const items = Array.from({ length: IMAGE_COUNT }, (_, i) => {
     let offset = i - activeIndex;
     if (offset > IMAGE_COUNT / 2) offset -= IMAGE_COUNT;
@@ -46,7 +58,7 @@ export default function Gallery() {
     return {
       key: i,
       src: `/uploads/mantenimiento${i + 1}.jpg`,
-      alt: `Paso ${i + 1} del proceso de mantenimiento de una lavadora`,
+      alt: IMAGE_ALT_TEXT[i],
       transform: `translateX(${x}px) scale(${scale})`,
       opacity,
       z: 10 - abs,

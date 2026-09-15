@@ -4,7 +4,7 @@ import './About.css';
 const ABOUT_CONTENT = [
   {
     eyebrow: 'Quiénes somos',
-    title: 'Un servicio técnico especializado en Quindío.',
+    title: 'Servicio técnico de lavadoras y estufas en Armenia y Quindío.',
     paragraph:
       'En Mantenimientos Gonbel nos dedicamos al mantenimiento preventivo, reparación e instalación de estufas y lavadoras, atendiendo hogares, familias y pequeños negocios en todo el departamento.',
   },

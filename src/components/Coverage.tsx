@@ -18,7 +18,9 @@ export default function Coverage() {
     <section id="cobertura" className="coverage">
       <div className="coverage__text">
         <span className="coverage__eyebrow">Cobertura</span>
-        <h2 className="coverage__title">Atendemos en todo el departamento del Quindío.</h2>
+        <h2 className="coverage__title">
+          Mantenimiento de lavadoras y estufas en todo el Quindío.
+        </h2>
         <p className="coverage__paragraph">
           Nuestro servicio es principalmente a domicilio: nos desplazamos hasta la ubicación del
           cliente en cualquiera de estos municipios.

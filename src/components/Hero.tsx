@@ -13,7 +13,9 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className={`hero__left ${visible ? 'hero__left--visible' : ''}`}>
-        <h1 className="hero__title">Tu estufa y tu lavadora, funcionando como nuevas.</h1>
+        <h1 className="hero__title">
+          Mantenimiento y reparación de lavadoras y estufas en Armenia y todo el Quindío.
+        </h1>
 
         <p className="hero__paragraph">
           Diagnóstico preciso, técnicos capacitados y repuestos de calidad para que recuperes tus
